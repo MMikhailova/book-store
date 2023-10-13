@@ -1,22 +1,39 @@
 import { v4 } from 'uuid';
 let movies = [
-    { id: '1', title: 'Thirteen, The (Trinadtsat)', genre: 'Adventure|War' },
-    { id: '2', title: 'UHF', genre: 'Comedy' },
-    { id: '3', title: 'Night to Remember, A', genre: 'Action|Drama' },
-    { id: '4', title: 'River, The (He liu)', genre: 'Drama' },
+    {
+        id: '1',
+        name: 'Patriot',
+        src: 'https://m.media-amazon.com/images/I/518IZVOjisL._AC_UF894,1000_QL80_.jpg'
+    },
+    {
+        id: '2',
+        name: 'Barbie',
+        src: 'https://m.media-amazon.com/images/I/71BgdzmFDAL.jpg'
+    },
+    {
+        id: '3',
+        name: 'Troy',
+        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQF-3wteC9fSNiCZEekpEByLW4axm4boSGX4JD-mZlgA&s'
+    },
+    {
+        id: '4',
+        name: 'Harry Potter',
+        src: 'https://cdn.europosters.eu/image/hp/80594.jpg'
+    },
     {
         id: '5',
-        title: 'Man from Snowy River, The',
-        genre: 'Drama|Romance|Western'
+        name: 'Tom & Jerry',
+        src: 'https://cdn.europosters.eu/image/750/posters/looney-tunes-tom-and-jerry-i12290.jpg'
     },
-    { id: '6', title: 'Prime Suspect: The Lost Child', genre: 'Drama|Mystery' },
-    { id: '7', title: 'Deep Cover', genre: 'Action|Crime|Thriller' },
-    { id: '8', title: 'Open Water', genre: 'Drama|Thriller' },
-    { id: '9', title: 'Kiss Me Deadly', genre: 'Film-Noir' },
     {
-        id: '10',
-        title: 'Koyaanisqatsi (a.k.a. Koyaanisqatsi: Life Out of Balance)',
-        genre: 'Documentary'
+        id: '6',
+        name: 'little mermaid',
+        src: 'https://www.themoviedb.org/t/p/original/cJbKUdbWcIFDuHhs6uvOfacemc4.jpg'
+    },
+    {
+        id: '7',
+        name: 'Oppenheimer',
+        src: 'https://movies.universalpictures.com/media/06-opp-dm-mobile-banner-1080x745-now-pl-f01-071223-64bab982784c7-1.jpg'
     }
 ];
 
@@ -26,15 +43,14 @@ let getMovieById = (id) => {
 
 const routerControllers = {
     getMovie: (req, res) => {
-        res.status(200).json(movies);
+        res.status(200).render('movies', { movies:movies });
     },
     getMovieById: (req, res) => {
         const { id } = req.params;
         const movieExist = getMovieById(id);
-        if (movieExist) {
-            movieExist && res.status(200).json(movieExist);
-        }
+        res.status(200).render('movie', { movie: movieExist });
     },
+     
     postMovie: (req, res) => {
         const { title, genre } = req.body;
         const newMovie = {
